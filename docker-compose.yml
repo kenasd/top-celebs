@@ -1,0 +1,22 @@
+version: '3.3'
+
+services:
+
+  mongo_db:
+    image: mongo
+    container_name: mongo-db
+    restart: always
+    ports:
+      - "27017:27017"
+
+  top_celebrity_api:
+    image: top-celebrity-service
+    container_name: top-celebrity-service-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - mongo_db
